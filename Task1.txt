@@ -1,0 +1,61 @@
+
+import re
+option=input("Login or Resister(login,reg):")
+if(option=="reg"):
+    pattern="^[a-z 0-9]+[\._]?[a-z 0-9]+[@]\w+[.]\w{2,3}$"
+    Email_id=input("Enter your email:")
+    password=input("Enter your password:")
+else:
+    print("Choose an option")
+if re.search(pattern,Email_id):
+    print(f"{Email_id} is vaild.")
+else:
+    print(f"{Email_id} is invalid.")
+flag=0
+if re.search('[a-z]',password):
+            flag=1
+if re.search('[0-9]',password):
+            flag=1
+if re.search('[A-Z]',password):
+            flag=1
+if re.search('[$#@!]',password):
+            flag=1
+if len(password)>5 and len(password)<16:    
+            flag=1
+if (flag==1):
+    print(f"{password} is valid.")
+    print("Registration successfull")
+    file=open("user_details.txt","w")
+    file.write(Email_id)
+    file.write(password)
+
+else:
+    print("Enter a strong password")
+    print("Registeration invalid")  
+
+if(option=="login"):
+    success=False
+    Email_id=input("Enter your email:")
+    password=input("Enter your password:")
+    file=open("user_details.txt","r")
+for i in file:
+    if i==Email_id+password:
+        print("email and password valid")
+        success=True
+    else:
+        print("email and password invalid")
+    if(success):
+        print("Login successfull")
+    else:
+        success==False
+        print("Login unsuccessfull")
+        print("please register or give forgetpassword")
+    if success==False:
+        
+        Email=input("Enter your email:")
+    if Email==Email_id:
+        file=open("user_details.txt","r")
+        print("your email and password is:",file)
+    else:
+        print("Provide valid email")
+       
